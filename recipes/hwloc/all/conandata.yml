@@ -1,0 +1,4 @@
+sources:
+  "2.8.0":
+    url: "https://github.com/open-mpi/hwloc/archive/refs/tags/hwloc-2.8.0.tar.gz"
+    sha256: "311d44e99bbf6d269c2cbc569d073978d88352bc31d51e31457d4df94783172d"
