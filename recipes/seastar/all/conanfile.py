@@ -37,7 +37,8 @@ class SeastarConan(ConanFile):
         self.build_requires("ninja/1.11.1")
         self.build_requires("ragel/6.10")
 
-    #lksctp-tools
+    #xfslibs-dev
+    #systemtap-sdt-dev
     def requirements(self):
         self.requires("boost/1.81.0")
         self.requires("c-ares/1.19.0")
@@ -80,7 +81,7 @@ class SeastarConan(ConanFile):
         self.copy("*.so*", dst="lib", src="lib", symlinks=True)
         self.copy("*.dylib*", dst="lib", src="lib", symlinks=True)
         self.copy("*.dll*", dst="lib", src="lib")
-        self.copy("*.h", dst="include", src="include", keep_path=True)
+        self.copy("*.hh", dst="include", src="%s/include" % (self._source_subfolder) , keep_path=True)
 
     def package_info(self):
         self.cpp_info.libs = ["forestdb"]
