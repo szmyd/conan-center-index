@@ -5,8 +5,8 @@ import os
 
 required_conan_version = ">=1.33.0"
 
-class HwlocConan(ConanFile):
-    name = "hwloc"
+class LKSctpToolsConan(ConanFile):
+    name = "lksctp-tools"
     description = "The Hardware Locality (hwloc) software project"
     license = "BSD-3"
     url = "https://github.com/conan-io/conan-center-index"
@@ -44,7 +44,7 @@ class HwlocConan(ConanFile):
 
     def build(self):
         with tools.chdir(self._source_subfolder):
-            self.run("./autogen.sh")
+            self.run("./bootstrap")
             env_build = AutoToolsBuildEnvironment(self)
             extra_args = list()
             if self.options.shared:
@@ -56,9 +56,7 @@ class HwlocConan(ConanFile):
 
     def package(self):
         self.copy("COPYING", src=self._source_subfolder, dst="licenses")
-        self.copy("*/hwloc.h", dst="include/", keep_path=False)
-        self.copy("*/netloc*.h", dst="include/", keep_path=False)
-        self.copy("*.h", dst="include", src="%s/include" % (self._source_subfolder) , keep_path=True)
+        self.copy("*.h", dst="include/netinet", src="%s/src/include/" % (self._source_subfolder) , keep_path=False)
         if self.options.shared:
             self.copy("*.dll", dst="bin", keep_path=False)
             self.copy("*.so*", dst="lib", keep_path=False, symlinks=True)
